@@ -1,5 +1,5 @@
 const { app, BrowserWindow, globalShortcut } = require('electron')
-const robot = require("robotjs");
+const { keyboard, Key } = require("@nut-tree/nut-js");
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -10,23 +10,25 @@ const createWindow = () => {
   win.loadFile('index.html')
 }
 
+keyboard.config.autoDelayMs = 0;
 app.whenReady().then(() => {
   createWindow()
   // Register a 'CommandOrControl+X' shortcut listener.
   globalShortcut.register('F1', () => {
-    robot.typeString("switch rac")
-    robot.keyTap("enter")
+    keyboard.type("switch can")
+    keyboard.type(Key.Enter)
   })
   globalShortcut.register('F2', () => {
-    robot.typeString("switch leon")
-    robot.keyTap("enter")
+    keyboard.type("switch leon")
+    keyboard.type(Key.Enter)
   })
   globalShortcut.register('F3', () => {
-    robot.typeString("switch ark")
-    robot.keyTap("enter")
+    keyboard.type("switch ark")
+    keyboard.type(Key.Enter)
   })
   console.log("F1", globalShortcut.isRegistered("F1"))
   console.log("F2", globalShortcut.isRegistered("F2"))
+  console.log("F3", globalShortcut.isRegistered("F3"))
 })
 
 app.on('will-quit', () => {
